@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/jutaz/node-depscan/issues"
   },
-  "homepage": "https://github.com/jutaz/node-depscan"
+  "homepage": "https://github.com/jutaz/node-depscan",
+  "dependencies": {
+    "detective": "^3.1.0",
+    "optimist": "^0.6.1"
+  }
 }
