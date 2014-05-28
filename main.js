@@ -1,5 +1,4 @@
 var detective = require('detective');
-var args = require('optimist').argv;
 var path = require('path');
 var fs = require('fs');
 
