@@ -37,11 +37,11 @@ var defaultModules = [
 if (process.argv.length > 3) {
     base = path.dirname(path.resolve(base, process.argv[2]));
     file = process.argv.slice(2);
+} else if (process.argv[2]) {
+    base = path.dirname(path.resolve(base, process.argv[2]));
+    file = path.basename(process.argv[2]);
 } else {
-    if (process.argv[2]) {
-        base = path.dirname(path.resolve(base, process.argv[2]));
-        file = path.basename(process.argv[2]);
-    }
+    file = false;
 }
 
 if (!fs.existsSync(base + '/package.json')) {
@@ -51,6 +51,10 @@ if (!fs.existsSync(base + '/package.json')) {
 
 var package = JSON.parse(fs.readFileSync(base + '/package.json'));
 var packageDeps = Object.keys(package.dependencies);
+
+if(file === false) {
+    file = path.resolve(base, package.main || 'index.js');
+}
 
 go(base, file);
 
