@@ -71,3 +71,14 @@ function check(files, dirname, sup) {
         check(files, path.dirname(path.resolve(dirname, file)), path.resolve(dirname, file));
     });
 }
+
+
+function go(basename, file) {
+    if(Array.isArray(file) && file.length > 1) {
+        file.forEach(function(f) {
+            check([f], basename);
+        });
+    } else {
+        check([file], basename);
+    }
+}
