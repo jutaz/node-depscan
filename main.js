@@ -43,10 +43,10 @@ function check(files, dirname, sup) {
         var files = [];
         var src;
         try {
-            if(fs.existsSync(path.resolve(dirname, file))) {
+            if (fs.existsSync(path.resolve(dirname, file))) {
                 src = fs.readFileSync(path.resolve(dirname, file));
             } else {
-                file = file.substr(0, file.length-3)+"/index.js";
+                file = file.substr(0, file.length - 3) + "/index.js";
                 src = fs.readFileSync(path.resolve(dirname, file));
             }
         } catch (e) {
