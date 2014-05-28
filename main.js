@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var detective = require('detective');
 var path = require('path');
 var fs = require('fs');
