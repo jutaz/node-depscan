@@ -36,7 +36,8 @@ var defaultModules = [
 ];
 
 if (process.argv.length > 3) {
-
+    base = path.dirname(path.resolve(base, process.argv[2]));
+    file = process.argv.slice(2);
 } else {
     if (process.argv[2]) {
         base = path.dirname(path.resolve(base, process.argv[2]));
