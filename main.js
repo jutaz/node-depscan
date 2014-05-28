@@ -80,7 +80,32 @@ processedDeps.forEach(function(dep) {
     }
 });
 
-console.log(dependencies);
+var answer = '';
+
+if (dependencies.unused.length === 0 && dependencies.missing.length === 0) {
+    console.log('Hooray. All dependencies are in place!');
+    process.exit(0);
+}
+
+if (dependencies.unused.length > 0) {
+    answer += 'These dependencies are not used:\n\n';
+    dependencies.unused.forEach(function(dep) {
+        answer += dep + '\n';
+    });
+} else {
+    answer += 'All deps are used.';
+}
+
+if (dependencies.missing.length > 0) {
+    answer += '\nThese dependencies are missing in package.json:\n\n';
+    dependencies.missing.forEach(function(dep) {
+        answer += dep + '\n';
+    });
+} else {
+    answer += 'No missing dependencies.';
+}
+
+console.log(answer);
 
 
 function get(items) {
