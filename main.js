@@ -166,7 +166,7 @@ function check(files, dirname, sup) {
 
 
 function go(basename, file) {
-    if(Array.isArray(file) && file.length > 1) {
+    if (Array.isArray(file) && file.length > 1) {
         file.forEach(function(f) {
             check([f], basename);
         });
