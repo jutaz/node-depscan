@@ -1,23 +1,26 @@
 {
-  "name": "node-depscan",
-  "version": "0.1.0",
-  "description": "",
-  "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jutaz/node-depscan.git"
-  },
-  "author": "Justas Brazauskas",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jutaz/node-depscan/issues"
-  },
-  "homepage": "https://github.com/jutaz/node-depscan",
-  "dependencies": {
-    "detective": "^3.1.0",
-    "optimist": "^0.6.1"
-  }
+    "name": "depscan",
+    "version": "0.1.0",
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "bin": {
+        "npm": "./main.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jutaz/node-depscan.git"
+    },
+    "author": "Justas Brazauskas",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/jutaz/node-depscan/issues"
+    },
+    "homepage": "https://github.com/jutaz/node-depscan",
+    "dependencies": {
+        "detective": "^3.1.0",
+        "optimist": "^0.6.1"
+    }
 }
