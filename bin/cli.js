@@ -11,7 +11,8 @@ if (process.argv.length > 3) {
     file = path.basename(process.argv[2]);
 } else {
     file = false;
+    base = path.resolve('.');
 }
 
-scan = new depscan(file);
+scan = new depscan(file, base);
 process.stdout.write(scan.answer());

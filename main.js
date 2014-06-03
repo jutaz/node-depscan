@@ -2,11 +2,15 @@ var detective = require('detective');
 var path = require('path');
 var fs = require('fs');
 
-function depscan(files) {
+function depscan(files, base) {
     this.deps = [];
     this.parsed = [];
     this.processedDeps = [];
-    this.base = path.resolve('.');
+    if(base) {
+        this.base = path.resolve('.', base);
+    } else {
+        this.base = path.resolve('.');
+    }
     if (!fs.existsSync(this.base + '/package.json')) {
         throw new Error('Project must have a package.json file. Aborting');
     }
