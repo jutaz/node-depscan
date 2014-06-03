@@ -140,8 +140,7 @@ depscan.prototype.answer = function() {
     var answer = '';
 
     if (dependencies.unused.length === 0 && dependencies.missing.length === 0) {
-        console.log('Hooray. All dependencies are in place!');
-        process.exit(0);
+        return 'Hooray. All dependencies are in place!';
     }
 
     if (dependencies.unused.length > 0) {
