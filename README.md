@@ -1,7 +1,7 @@
 node-depscan
 ============
 
-This finds unused deppendencies.
+This finds unused dependencies.
 
 # Usage
 
