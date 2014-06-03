@@ -6,7 +6,7 @@ function depscan(files, base) {
     this.deps = [];
     this.parsed = [];
     this.processedDeps = [];
-    if(base) {
+    if (base) {
         this.base = path.resolve('.', base);
     } else {
         this.base = path.resolve('.');
@@ -16,7 +16,7 @@ function depscan(files, base) {
     }
     this.package = JSON.parse(fs.readFileSync(this.base + '/package.json'));
     this.packageDeps = Object.keys(this.package.dependencies);
-    if(!file) {
+    if (!file) {
         this.file = path.resolve(this.base, this.package.main || 'index.js');
     } else {
         this.file = files;
