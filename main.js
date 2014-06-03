@@ -86,34 +86,36 @@ depscan.prototype.check = function(files, dirname, sup) {
             file += '.js';
         }
         var files = [];
-        var src;
-        try {
-            if (fs.existsSync(path.resolve(dirname, file))) {
-                src = fs.readFileSync(path.resolve(dirname, file));
-            } else {
-                file = file.substr(0, file.length - 3) + "/index.js";
-                src = fs.readFileSync(path.resolve(dirname, file));
+        self.readFile(file, dirname, function(src, file) {
+            self.parsed.push(path.resolve(dirname, file));
+            var requires = detective(src);
+            items = self.get(requires);
+            self.deps = items.deps.concat(self.deps);
+            items.files.forEach(function(file) {
+                if (file.indexOf('.js') === -1) {
+                    file += '.js';
+                }
+                if (self.parsed.indexOf(path.resolve(dirname, file)) === -1) {
+                    files.push(file);
+                }
+            });
+            if (files.length < 1) {
+                return;
             }
-        } catch (e) {
-            throw new Error(e, sup);
-        }
-        self.parsed.push(path.resolve(dirname, file));
-        var requires = detective(src);
-        items = self.get(requires);
-        self.deps = items.deps.concat(self.deps);
-        items.files.forEach(function(file) {
-            if (file.indexOf('.js') === -1) {
-                file += '.js';
-            }
-            if (self.parsed.indexOf(path.resolve(dirname, file)) === -1) {
-                files.push(file);
-            }
+            self.check(files, path.dirname(path.resolve(dirname, file)), path.resolve(dirname, file));
         });
-        if (files.length < 1) {
-            return;
-        }
-        self.check(files, path.dirname(path.resolve(dirname, file)), path.resolve(dirname, file));
     });
+};
+
+depscan.prototype.readFile = function(file, dirname, callback) {
+    var src;
+    if (fs.existsSync(path.resolve(dirname, file))) {
+        src = fs.readFileSync(path.resolve(dirname, file));
+    } else {
+        file = file.substr(0, file.length - 3) + "/index.js";
+        src = fs.readFileSync(path.resolve(dirname, file));
+    }
+    callback(src, file);
 };
 
 depscan.prototype.answer = function() {
