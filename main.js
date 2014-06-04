@@ -57,7 +57,7 @@ depscan.prototype.go = function() {
     var self = this;
     if (Array.isArray(this.file) && this.file.length > 1) {
         this.file.forEach(function(f) {
-            self.check([f], this.base);
+            self.check([f], self.base);
         });
     } else {
         this.check([this.file], this.base);
