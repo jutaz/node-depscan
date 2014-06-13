@@ -30,3 +30,20 @@ msgpack
 policyfile
 
 ```
+
+# Programmatic Usage
+
+```javascript
+var depscan = require('depscan');
+var scan = depscan('./index.js', __dirname);
+
+var report = scan.report();
+console.log(report);
+```
+`report` is an object like this:
+```javascript
+{
+  unused: ['foo'],
+  missing: ['bar','baz']
+}
+```

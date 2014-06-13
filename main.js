@@ -122,29 +122,7 @@ depscan.prototype.readFile = function(file, dirname, callback) {
 };
 
 depscan.prototype.answer = function() {
-    var self = this;
-    this.deps.forEach(function(dep) {
-        if (self.processedDeps.indexOf(dep) === -1) {
-            self.processedDeps.push(dep.toLowerCase());
-        }
-    });
-
-    var dependencies = {
-        unused: [],
-        missing: []
-    };
-
-    this.packageDeps.forEach(function(dep) {
-        if (self.processedDeps.indexOf(dep.toLowerCase()) === -1) {
-            dependencies.unused.push(dep.toLowerCase());
-        }
-    });
-
-    this.processedDeps.forEach(function(dep) {
-        if (self.packageDeps.indexOf(dep.toLowerCase()) === -1 && self.defaultModules.indexOf(dep.toLowerCase()) === -1) {
-            dependencies.missing.push(dep.toLowerCase());
-        }
-    });
+    var dependencies = this.report()
 
     var answer = '';
 
@@ -171,4 +149,32 @@ depscan.prototype.answer = function() {
     }
 
     return answer;
+};
+
+depscan.prototype.report = function() {
+    var self = this;
+    this.deps.forEach(function(dep) {
+        if (self.processedDeps.indexOf(dep) === -1) {
+            self.processedDeps.push(dep.toLowerCase());
+        }
+    });
+
+    var dependencies = {
+        unused: [],
+        missing: []
+    };
+
+    this.packageDeps.forEach(function(dep) {
+        if (self.processedDeps.indexOf(dep.toLowerCase()) === -1) {
+            dependencies.unused.push(dep.toLowerCase());
+        }
+    });
+
+    this.processedDeps.forEach(function(dep) {
+        if (self.packageDeps.indexOf(dep.toLowerCase()) === -1 && self.defaultModules.indexOf(dep.toLowerCase()) === -1) {
+            dependencies.missing.push(dep.toLowerCase());
+        }
+    });
+
+    return dependencies;
 };
