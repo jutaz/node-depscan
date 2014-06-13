@@ -3,6 +3,9 @@ var path = require('path');
 var fs = require('fs');
 
 function depscan(files, base) {
+    if (!(this instanceof depscan)) {
+        return new depscan(files, base);
+    }
     this.deps = [];
     this.parsed = [];
     this.processedDeps = [];
@@ -16,7 +19,7 @@ function depscan(files, base) {
     }
     this.package = JSON.parse(fs.readFileSync(this.base + '/package.json'));
     this.packageDeps = Object.keys(this.package.dependencies);
-    if (!file) {
+    if (!files) {
         this.file = path.resolve(this.base, this.package.main || 'index.js');
     } else {
         this.file = files;

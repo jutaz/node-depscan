@@ -2,6 +2,7 @@
 var depscan = require('../main');
 var path = require('path');
 var base = path.resolve('.');
+var file = false;
 
 if (process.argv.length > 3) {
     base = path.dirname(path.resolve(base, process.argv[2]));
