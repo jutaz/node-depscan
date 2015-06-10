@@ -73,7 +73,7 @@ depscan.prototype.get = function(items) {
         files: []
     };
     items.forEach(function(dep) {
-        if (dep.indexOf('/') === -1 && dep.indexOf('.js') === -1) {
+        if (isExternalDependency(dep)) {
             files.deps.push(dep.toLowerCase());
         } else if (dep.indexOf('.json') === -1) {
             files.files.push(dep);
@@ -81,6 +81,11 @@ depscan.prototype.get = function(items) {
     });
     return files;
 };
+
+function isExternalDependency(symbol) {
+    return (symbol.indexOf('/') === -1 && symbol.indexOf('.js') === -1) ||
+        /@\w+\/\w+/.test(symbol) // npm scoped module
+}
 
 depscan.prototype.check = function(files, dirname, sup) {
     var self = this;
